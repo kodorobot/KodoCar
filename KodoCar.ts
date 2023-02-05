@@ -62,7 +62,7 @@ enum servoPin {
 /**
  * Custom blocks
  */
-//% weight=100 color=#dd7b34 icon="" block="麥昆"
+//% weight=100 color=#dd7b34 icon="" block="KodoCar"
 namespace KodoCar {
     //% block="馬達 %lr 方向 %fb 速度 %speed"
     //% speed.min=0 speed.max=255 speed.defl=50
