@@ -1,4 +1,4 @@
-//% color=#dd7b34 block="KodoCar"
+//% color=#dd7b34 icon="\u21db" block="KodoCar"
 //% category="KodoCar"
 namespace KodoCar {
     export namespace background {
