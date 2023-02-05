@@ -390,6 +390,7 @@ namespace KodoCar {
     //% pin.fieldEditor="gridpicker"
     //% pin.fieldOptions.columns=4
     //% pin.fieldOptions.tooltips="false"
+    //% pin.defl=DigitalPin.P5
     //% weight=90
     export function connectIrReceiver(
         pin: DigitalPin,
