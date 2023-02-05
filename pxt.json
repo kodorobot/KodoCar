@@ -8,7 +8,8 @@
         "main.blocks",
         "main.ts",
         "README.md",
-        "KodoCar.ts"
+        "KodoCar.ts",
+        "background.ts"
     ],
     "testFiles": [
         "test.ts"
