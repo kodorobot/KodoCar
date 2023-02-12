@@ -126,7 +126,7 @@ namespace KodoCar {
     //% block="馬達 %lr 方向 %fb 速度 %speed"
     //% speed.min=0 speed.max=255 speed.defl=50
     export function motor(lr: leftRight, fb: forwardBack, speed: number): void {
-        const motorList: AnalogPin[] = [AnalogPin.P7, AnalogPin.P6, AnalogPin.P13, AnalogPin.P14]
+        const motorList: AnalogPin[] = [AnalogPin.P13, AnalogPin.P14, AnalogPin.P6, AnalogPin.P7 ]
         let i = 0
         if (lr) i += 2
         if (fb) i += 1
@@ -135,22 +135,24 @@ namespace KodoCar {
 
     //% block="LED燈 %lr %on"
     export function led(lr: leftRight, on: onoff): void {
-        let pinId: DigitalPin = DigitalPin.P3
-        if (lr) pinId = DigitalPin.P9
-        pins.digitalWritePin(pinId, on)
+        let pinId: DigitalPin = DigitalPin.P9
+        if (lr==1) pinId = DigitalPin.P3
+        
+        pins.digitalWritePin(pinId, Math.abs(on - 1))
     }
 
     //% block="馬達停止 %lr"
     export function motorStop(lr: leftRightAll): void {
-        if (lr == 1) {
-            pins.analogWritePin(AnalogPin.P6, 0)
-            pins.analogWritePin(AnalogPin.P7, 0)
-        } else if (lr == 2) {
+        if (lr == 0) {
             pins.analogWritePin(AnalogPin.P14, 0)
             pins.analogWritePin(AnalogPin.P13, 0)
-        } else {
+        } else if (lr == 1) {
             pins.analogWritePin(AnalogPin.P6, 0)
             pins.analogWritePin(AnalogPin.P7, 0)
+            pins.digitalWritePin(DigitalPin.P9, 1)
+        } else {
+            pins.analogWritePin(AnalogPin.P7, 0)
+            pins.analogWritePin(AnalogPin.P6, 0)
             pins.analogWritePin(AnalogPin.P13, 0)
             pins.analogWritePin(AnalogPin.P14, 0)
         }
@@ -174,19 +176,20 @@ namespace KodoCar {
 
     //% block="巡線感測器 %lrm"
     export function line(lrm: leftRightMid): number {
-        let v = 0;
+        let pin;
         switch (lrm) {
             case 0:
-                v = pins.analogReadPin(AnalogPin.P10)
+                pin =AnalogPin.P16
                 break
             case 1:
-                v = pins.analogReadPin(AnalogPin.P16)
+                pin =AnalogPin.P12
                 break
             case 2:
-                v = pins.analogReadPin(AnalogPin.P12)
+                pin = AnalogPin.P10
                 break
         }
-        return v
+        
+        return pins.analogReadPin(pin)
     }
 
     //% block="超音波距離 %unit"
